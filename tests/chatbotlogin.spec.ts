@@ -56,12 +56,14 @@ test("both correct",async({page})=>
     await page.getByPlaceholder("Enter your email id").fill("setup@rsoftai.com");
     await page.getByPlaceholder("Enter your password").fill("Rsoft!@3456");
     await page.getByRole("button", { name: "SIGN IN" }).click();
-    const dash1=await page.getByAltText("User").isVisible()
-    console.log(dash1)
-    if(dash1){
-        console.log("Login successful, dashboard is visible");
-    }
-    else{
-        console.log("Login failed, dashboard is not visible");
-    }
+    await expect(page.getByText(" Survey Form ")).toBeVisible();
+    // await expect(page.locator("//span[@class='active ng-star-inserted']")).toBeVisible();
+    // await page.waitForTimeout(5000);
+    // let xp:Locator=page.locator("//span[@class='active ng-star-inserted']")
+    // let textcontent = await xp.textContent();
+    // console.log(textcontent);
+    // let home = await page.getByLabel("Home / ").isVisible();
+    // console.log(home);
+    // let tit = await page.getByText("Chatbot").isVisible();
+    // console.log(tit)
 });
