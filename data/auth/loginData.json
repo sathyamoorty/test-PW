@@ -1,0 +1,31 @@
+{
+  "invalidLoginScenarios": [
+    {
+      "testName": "invalid company name",
+      "companyName": "123456789",
+      "username": "SURESH",
+      "password": "Rsoft!@3456"
+    },
+    {
+      "testName": "invalid username",
+      "companyName": "SATHYAMOORTHY",
+      "username": "qwertyuiop",
+      "password": "Rsoft!@3456"
+    },
+    {
+      "testName": "invalid password",
+      "companyName": "SATHYAMOORTHY",
+      "username": "rsoft",
+      "password": "Rsoft"
+    },
+    {
+      "testName": "missing company name"
+    }
+  ],
+  "validLogin": {
+    "testName": "valid inputs",
+    "companyName": "SATHYAMOORTHY",
+    "username": "rsoft",
+    "password": "RSoft!@345"
+  }
+}
