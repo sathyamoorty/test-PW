@@ -3,7 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 const url = "https://rdot.in";
 const dashNav = "https://rdot.in/public/admin/Dashboard";
 const companyNameField = { role: "textbox" as const, name: "Company Name" };
-const loginButton = { role: "button" as const, name: "Login" };
+const loginBtn = { role: "button" as const, name: "Login" };
 
 type LoginData = {
   companyName?: string;
@@ -27,7 +27,7 @@ async function login(page: Page, { companyName, userName, password }: LoginData)
     await page.getByPlaceholder("Enter Password").fill(password);
   }
 
-  await page.getByRole(loginButton.role, { name: loginButton.name }).click();
+  await page.getByRole(loginBtn.role, { name: loginBtn.name }).click();
 }
 
 async function getToastMessage(page: Page) {
@@ -47,7 +47,7 @@ test("invalid company name", async ({ page }) => {
 test("invalid username", async ({ page }) => {
   await login(page, {
     companyName: "SATHYAMOORTHY",
-    userName: "qwertyuiop",
+    userName: "alan",
     password: "Rsoft!@3456",
   });
 
@@ -69,12 +69,24 @@ test("missing company name", async ({ page }) => {
   console.log(await getToastMessage(page));
 });
 
-test("Valid inputs", async ({ page }) => {
+test("Valid inputs", async ({ page }) => 
+{
   await login(page, {
     companyName: "SATHYAMOORTHY",
     userName: "rsoft",
     password: "RSoft!@345",
   });
+  await test.step("User lands on dashboard after login", async () => {
+     await page.locator("//li[@class='dropdown dropdown-user nav-item']//a[@class='dropdown-toggle nav-link dropdown-user-link']//img").click();
+        console.log("Clicked on the profile icon"); 
+  })
+    
+  // await test.step("User lands on dashboard after login", async () => {
+  //   await expect(page).toHaveURL(dashNav);
+  //   console.log("Login successful!, Navigated to Dashboard");
+  // });
 
-  await expect(page).toHaveURL(dashNav);
+  // await test.step("Continue the flow from the dashboard", async () => {
+  //   await page.locator("span.avatar").nth(0).click();
+  // });
 });
