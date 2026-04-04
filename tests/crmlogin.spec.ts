@@ -69,17 +69,37 @@ test("missing company name", async ({ page }) => {
   console.log(await getToastMessage(page));
 });
 
-test("Valid inputs", async ({ page }) => 
-{
+test("Valid inputs", async ({ page }) => {
   await login(page, {
     companyName: "SATHYAMOORTHY",
     userName: "rsoft",
     password: "RSoft!@345",
   });
+
   await test.step("User lands on dashboard after login", async () => {
-     await page.locator("//li[@class='dropdown dropdown-user nav-item']//a[@class='dropdown-toggle nav-link dropdown-user-link']//img").click();
-        console.log("Clicked on the profile icon"); 
-  })
+    await page
+      .locator(
+        "//li[@class='dropdown dropdown-user nav-item']//a[@class='dropdown-toggle nav-link dropdown-user-link']//img",
+      )
+      .click();
+    console.log("Clicked on the profile icon");
+
+    await page.getByText("CRM Setting").nth(1).click();
+    console.log("Clicked on CRM Setting");
+
+    await page.waitForTimeout(2000);
+    await page.getByRole("button", { name: "User & Access Control" }).click();
+    await page.waitForTimeout(2000);
+    console.log("Clicked on User & Access Control");
+
+    await page.locator('label:has-text("Profile")').click();
+    console.log("Clicked on Profile");
+    await page.waitForTimeout(2000);
+  });
+//   await test.step("Continue the flow from the dashboard", async () => {
+ 
+//  console.log("Clicked on CRM Setting");
+//  })
     
   // await test.step("User lands on dashboard after login", async () => {
   //   await expect(page).toHaveURL(dashNav);
