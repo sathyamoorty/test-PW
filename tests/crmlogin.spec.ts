@@ -31,7 +31,7 @@ async function login(page: Page, { companyName, userName, password }: LoginData)
 }
 
 async function getToastMessage(page: Page) {
-  return page.locator("//div[@class='toast-message']").textContent();
+  return page.locator(" //div[@class='toast-message']").textContent();
 }
 
 test("invalid company name", async ({ page }) => {
@@ -87,14 +87,14 @@ test("Valid inputs", async ({ page }) => {
     await page.getByText("CRM Setting").nth(1).click();
     console.log("Clicked on CRM Setting");
 
-    await page.waitForTimeout(2000);
+    //await page.waitForTimeout(2000);
     await page.getByRole("button", { name: "User & Access Control" }).click();
-    await page.waitForTimeout(2000);
+    //await page.waitForTimeout(2000);
     console.log("Clicked on User & Access Control");
 
     await page.locator('label:has-text("Profile")').click();
     console.log("Clicked on Profile");
-    await page.waitForTimeout(2000);
+   // await page.waitForTimeout(2000);
   });
 //   await test.step("Continue the flow from the dashboard", async () => {
  
